@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pico W Digital Twin</title>
+    <!-- Link external CSS -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Pico W Digital Twin</h1>
+    <div class="main-layout">
+        <div class="col-left">
+            <!-- System Status -->
+            <div class="card"><h2>System Status</h2><div class="status-grid">
+                <div class="status-item"><div class="status-label">Device Time</div><div id="status-time" class="status-value"><EXTDATA name="time" /></div></div>
+                <div class="status-item"><div class="status-label">Internal Temp</div><div id="status-temp" class="status-value"><EXTDATA name="temp_c" /> &deg;C</div></div>
+                <div class="status-item"><div class="status-label">IP Address</div><div id="status-ip" class="status-value"><EXTDATA name="ip" /></div></div>
+                <div class="status-item"><div class="status-label">BLE Status</div><div id="status-ble-status" class="status-value"><EXTDATA name="ble_status" /></div></div>
+                <div class="status-item"><div class="status-label">BLE Name</div><div id="status-ble-name" class="status-value"><EXTDATA name="ble_name" /></div></div>
+            </div></div>
+            <!-- Wi-Fi Config -->
+            <div class="card"><h2>Wi-Fi Configuration</h2><form id="wifi-form" class="config-form">
+                <label for="ssid">SSID:</label><input type="text" id="ssid" name="ssid" value="<EXTDATA name="wifi_ssid" />" required /><span/>
+                <label for="password">Password:</label><input type="password" id="password" name="password" value="" placeholder="Enter new password to change" /><button type="submit">Reconnect</button>
+            </form></div>
+            <!-- BLE Config -->
+            <div class="card"><h2>Bluetooth LE Configuration</h2><form id="ble-name-form" class="config-form">
+                <label for="ble_name">Name:</label><input type="text" id="ble_name" name="name" value="<EXTDATA name="ble_name" />" maxlength="27" required /><button type="submit" style="background-color: #fa383e;">Set Name</button>
+            </form><div class="ble-actions">
+                <button type="button" class="ble-start" onclick="controlBle('start')">Start Adv</button>
+                <button type="button" class="ble-stop" onclick="controlBle('stop')">Stop Adv</button>
+            </div></div>
+            <!-- ADC Status -->
+            <div class="card"><h2>ADC Status</h2><div class="status-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                <div class="status-item"><div class="status-label">ADC 0 (GP26)</div><div id="status-adc0" class="status-value"><EXTDATA name="adc0_v" /> V</div></div>
+                <div class="status-item"><div class="status-label">ADC 1 (GP27)</div><div id="status-adc1" class="status-value"><EXTDATA name="adc1_v" /> V</div></div>
+                <div class="status-item"><div class="status-label">ADC 2 (GP28)</div><div id="status-adc2" class="status-value"><EXTDATA name="adc2_v" /> V</div></div>
+            </div></div>
+            <!-- Console -->
+            <div class="card"><h2>Server Log</h2><pre id="console-log"><EXTDATA name="console_log" /></pre>
+                <form id="console-form" style="display: flex; gap: 10px;">
+                    <input type="text" id="user_input" name="input" placeholder="Type console command..." required style="flex-grow: 1; padding: 8px; border: 1px solid #ccc; border-radius: 6px;"/>
+                    <button type="submit">Send</button>
+            </form></div>
+             <!-- Memory Management Controls -->
+             <div class="card"><h2>Memory Control</h2><div class="mem-actions" style="display: flex; gap: 10px;">
+                 <button type="button" onclick="apiCall('/control/load_templates').then(() => logToConsole('[MEM] Load requested.'))" style="background-color: #ffc107; color:#333;">Load Templates</button>
+                 <button type="button" onclick="apiCall('/control/free_templates').then(() => logToConsole('[MEM] Free requested.'))" style="background-color: #6c757d;">Free Templates</button>
+             </div></div>
+        </div>
+        <div class="col-right">
+            <!-- Pinout Shell (Populated by Python during initial load, then updated by JS) -->
+            <div class="card"><h2>Pico W Pinout Control</h2><EXTDATA name="pinout_html" /></div>
+            <!-- PWM Shell (Populated by JS) -->
+            <div class="card"><h2>PWM Controls</h2><div id="pwm-controls-container"><p id="pwm-placeholder" style='color: #777;'>PWM controls appear here.</p></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Link External JS file -->
+<script src="/app.js"></script>
+
+</body>
+</html>

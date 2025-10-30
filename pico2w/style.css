@@ -1,0 +1,396 @@
+/* style.css - Stylesheet for Pico W Digital Twin */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+    margin: 0;
+    padding: 10px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 0 10px;
+}
+
+h1 {
+    color: #1877f2;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.25rem;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    color: #333;
+}
+
+.card {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Main two-column layout */
+.main-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.col-left {
+    flex: 3;
+    min-width: 400px;
+}
+
+.col-right {
+    flex: 5;
+    min-width: 600px;
+}
+
+/* Status Grid */
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+}
+
+.status-item {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 5px solid #1877f2;
+}
+
+.status-label {
+    font-size: 0.8em;
+    color: #657786;
+    text-transform: uppercase;
+}
+
+.status-value {
+    font-size: 1.1em;
+    font-weight: bold;
+    overflow-wrap: break-word;
+}
+.status-value.status-error { color: #fa383e; }
+.status-value.status-warning { color: #ffc107; }
+
+
+/* Config Forms */
+.config-form {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+}
+
+.config-form label {
+    font-weight: bold;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.config-form input[type="text"],
+.config-form input[type="password"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.config-form button { /* Changed from input[type="submit"] */
+    background-color: #1877f2;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.config-form button:hover {
+    background-color: #166fe5;
+}
+
+.ble-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.ble-actions button { /* Shared style for BLE buttons */
+    flex-grow: 1;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.ble-start { background-color: #42b72a; }
+.ble-start:hover { background-color: #36a420; }
+.ble-stop { background-color: #fa383e; }
+.ble-stop:hover { background-color: #e0282e; }
+
+
+/* Pinout Grid */
+.pinout-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto; /* Allow horizontal scroll on very small screens */
+}
+
+.pin-col-left,
+.pin-col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.pico-graphic {
+    text-align: center;
+    padding: 0 10px;
+    margin-top: 20px;
+    flex-shrink: 0; /* Prevent image from shrinking too much */
+}
+.pico-graphic img {
+     width:100%; max-width:250px; border-radius: 8px;
+}
+
+
+.onboard-led-control {
+    margin-top: 10px;
+    border: 2px dashed #1877f2;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.pin-element {
+    display: flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 2px;
+    flex-wrap: nowrap; /* Prevent controls wrapping */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+}
+
+.pin-col-right .pin-element {
+    justify-content: flex-end;
+}
+
+.pin-index {
+    font-weight: bold;
+    color: #fff;
+    background-color: #657786;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.8em;
+    margin: 0 4px;
+    flex-shrink: 0;
+}
+
+.pin-label {
+    margin: 0 5px;
+    font-family: monospace;
+    font-size: 0.9em;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pin-status {
+    font-weight: bold;
+    margin-left: 8px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 0.85em;
+    flex-shrink: 0;
+}
+
+.pin-controls {
+    display: inline-flex;
+    gap: 4px;
+    flex-shrink: 0;
+    margin-left: 5px;
+}
+
+.pin-col-right .pin-controls {
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+
+/* --- Pin State Colors --- */
+.pin-fixed.pin-power { background-color: #ffe0b2; border-color: #ff9800; }
+.pin-fixed.pin-power .pin-power-val { color: #e65100; }
+.pin-fixed.pin-special { background-color: #cfd8dc; border-color: #607d8b; }
+.pin-fixed .pin-special-val { color: #37474f; }
+
+.pin-out { background-color: #e3f2fd; border-color: #90caf9; } /* Default OUT LOW */
+.pin-out.pin-out-high { background-color: #bbdefb; border-color: #1e88e5; } /* OUT HIGH */
+.pin-out .pin-out-val { color: #0d47a1; }
+
+.pin-in { background-color: #e8f5e9; border-color: #c8e6c9; } /* Default IN LOW */
+.pin-in.pin-in-high { background-color: #a5d6a7; border-color: #66bb6a; } /* IN HIGH */
+.pin-in .pin-val { color: #1b5e20; }
+
+.pin-adc { background-color: #ede7f6; border-color: #ab47bc; }
+.pin-adc .pin-adc-val { color: #4a148c; }
+.pin-pwm { background-color: #fce4ec; border-color: #ec407a; }
+.pin-pwm .pin-pwm-val { color: #ad1457; }
+.pin-error { background-color: #ffcdd2; border-color: #f44336; color: #b71c1c; }
+/* --- End Pin State Colors --- */
+
+
+/* Pin Controls */
+.pin-controls select {
+    padding: 2px 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.85em;
+    background-color: #fff;
+}
+
+.pin-controls button {
+    padding: 3px 8px;
+    font-size: 0.85em;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    background-color: #1877f2;
+    cursor: pointer;
+}
+.pin-controls button:hover { background-color: #166fe5; }
+
+
+/* PWM Controls */
+#pwm-controls-container .pwm-form {
+    display: grid;
+    /* Adjust columns for better wrapping */
+    grid-template-columns: minmax(100px, auto) repeat(4, auto) 1fr;
+    gap: 8px 12px; /* Row gap, column gap */
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+/* Ensure labels align with inputs */
+#pwm-controls-container .pwm-label { grid-column: 1; }
+#pwm-controls-container .pwm-label-small { font-size: 0.85em; text-align: right; }
+#pwm-controls-container label[for^="pwm-freq"] { grid-column: 2; }
+#pwm-controls-container input[id^="pwm-freq"] { grid-column: 3; }
+#pwm-controls-container label[for^="pwm-duty"] { grid-column: 4; }
+#pwm-controls-container input[id^="pwm-duty"] { grid-column: 5; }
+#pwm-controls-container .pwm-submit { grid-column: 6; }
+
+
+.pwm-input {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.pwm-submit { /* Style for the button */
+    background-color: #ec407a;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    justify-self: start; /* Align button left */
+}
+.pwm-submit:hover { background-color: #d81b60; }
+
+/* Console */
+#console-log { /* Renamed ID */
+    white-space: pre-wrap;
+    background-color: #1e1e1e;
+    color: #00ff7f;
+    padding: 15px;
+    border-radius: 6px;
+    height: 250px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+    font-family: 'Consolas', 'Menlo', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+}
+#console-form button { /* Style console send button */
+     background-color: #1877f2;
+     color: white; padding: 8px 15px;
+     border: none; border-radius: 6px; cursor: pointer;
+     font-size: 14px;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 1100px) {
+    .col-left, .col-right {
+        flex-basis: 100%;
+        min-width: initial; /* Allow shrinking */
+    }
+    .pinout-grid {
+        flex-direction: column;
+    }
+    .pin-col-right {
+        text-align: left; /* Align right column left on mobile */
+    }
+    .pin-col-right .pin-element {
+        justify-content: flex-start; /* Align content left */
+        flex-direction: row; /* Ensure row layout */
+    }
+    /* Adjust order for right column elements on mobile */
+    .pin-col-right .pin-index { order: 1; }
+    .pin-col-right .pin-label { order: 2; }
+    .pin-col-right .pin-controls { order: 3; margin-left: 5px; margin-right: 0; }
+}
+
+@media (max-width: 700px) {
+    .config-form {
+        grid-template-columns: auto 1fr; /* Stack label and input */
+    }
+    .config-form label { text-align: left; }
+    .config-form span { display: none; } /* Hide spacer */
+    .config-form button { grid-column: 1 / -1; } /* Full width button */
+
+    #pwm-controls-container .pwm-form {
+        grid-template-columns: auto 1fr; /* Stack labels and inputs */
+    }
+    .pwm-label-small { text-align: left; grid-column: 1; }
+    .pwm-input { width: 100%; box-sizing: border-box; grid-column: 2; }
+    /* Ensure correct grid placement for PWM controls */
+    #pwm-controls-container label[for^="pwm-freq"] { grid-column: 1; }
+    #pwm-controls-container input[id^="pwm-freq"] { grid-column: 2; }
+    #pwm-controls-container label[for^="pwm-duty"] { grid-column: 1; }
+    #pwm-controls-container input[id^="pwm-duty"] { grid-column: 2; }
+    .pwm-submit { grid-column: 1 / -1; justify-self: stretch; } /* Full width button */
+
+    .pin-element { flex-wrap: wrap; } /* Allow controls to wrap below label */
+    .pin-controls { margin-left: auto; margin-right: auto; } /* Center controls when wrapped */
+
+}
