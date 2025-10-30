@@ -564,7 +564,7 @@ class Html_controler:
             DPRINT("Ctrl.handle_client: Connection fully closed.")
 
     # --- Background Task ---
-    async def background_update_task(self, interval_ms=5000):
+    async def background_update_task(self, interval_ms=59000):
         DPRINT("Ctrl.background_task: Starting background input scanner...")
         while True:
             try:
